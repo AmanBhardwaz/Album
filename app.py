@@ -51,5 +51,5 @@ def upload(album_type):
 
     return render_template('upload.html', album_type=album_type)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
