@@ -47,7 +47,16 @@ def upload(album_type):
             flash('No valid images were uploaded. Please try again.')
             return render_template('upload.html', album_type=album_type)
 
-        return render_template('album.html', album_type=album_type, images=image_names)
+        if album_type == 'love':
+            return render_template('love.html', images=image_names)
+        elif album_type == 'birthday':
+            return render_template('birthday.html', images=image_names)
+        elif album_type == 'marriage':
+            return render_template('marriage.html', images=image_names)
+        elif album_type == 'couple':
+            return render_template('couple.html', images=image_names)
+        else:
+            return render_template('album.html', album_type=album_type, images=image_names)
 
     return render_template('upload.html', album_type=album_type)
 

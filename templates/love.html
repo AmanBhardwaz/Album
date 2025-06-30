@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Album</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: transparent;
+            color: #fff;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        h1 {
+            margin-top: 30px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 30px rgba(255, 64, 129, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        h1::before {
+            content: '💕';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+        h1::after {
+            content: '💕';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            animation: heartBeat 2s ease-in-out infinite 1s;
+        }
+        @keyframes titleGlow {
+            0% {
+                box-shadow: 0 0 30px rgba(255, 64, 129, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 50px rgba(255, 64, 129, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.2);
+                transform: scale(1.02);
+            }
+        }
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: translateY(-50%) scale(1);
+            }
+            50% {
+                transform: translateY(-50%) scale(1.2);
+            }
+        }
+        .carousel-container {
+            perspective: 1200px;
+            margin: 60px auto;
+            width: 80vw;
+            max-width: 400px;
+            height: 300px;
+            position: relative;
+            background: transparent;
+            border-radius: 20px;
+            padding: 20px;
+        }
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            animation: spin 25s linear infinite;
+        }
+        .carousel img {
+            position: absolute;
+            width: 250px;
+            height: 160px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 0 15px #fff;
+            transition: transform 0.5s;
+        }
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        .no-images {
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            max-width: 400px;
+        }
+        a {
+            display: inline-block;
+            margin: 20px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        a:hover {
+            background: rgba(255, 64, 129, 0.9);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        /* Floating particles for love section */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .particle {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            animation: float 6s ease-in-out infinite;
+        }
+        .heart {
+            color: #ff6b9d;
+            font-size: 24px;
+        }
+        .sparkle {
+            color: #ffd700;
+            font-size: 18px;
+        }
+        .rose {
+            color: #ff1493;
+            font-size: 22px;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-40px) rotate(180deg);
+                opacity: 0.8;
+            }
+            75% {
+                transform: translateY(-20px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+        /* Background video for love section */
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 1;
+        }
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: -1;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .carousel-container {
+                height: 250px;
+            }
+            .carousel img {
+                width: 200px;
+                height: 130px;
+            }
+        }
+        .album-heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+        .album-heading h1 {
+            background: linear-gradient(90deg, #ffb6c1 0%, #ff69b4 50%, #b19cd9 100%);
+            color: #fff;
+            padding: 24px 48px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px 0 rgba(255, 105, 180, 0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+            border: 3px solid rgba(255,255,255,0.25);
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 16px #ff69b4, 0 1px 1px #fff;
+            position: relative;
+            z-index: 2;
+            animation: headingGlow 2.5s ease-in-out infinite alternate;
+        }
+        @keyframes headingGlow {
+            0% { box-shadow: 0 8px 32px 0 rgba(255, 105, 180, 0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10); }
+            100% { box-shadow: 0 0 40px 10px #ff69b4, 0 1.5px 8px 0 rgba(0,0,0,0.10); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background video for love section -->
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="{{ url_for('static', filename='videos/love-video.mp4') }}" type="video/mp4">
+        <source src="{{ url_for('static', filename='videos/love-video.webm') }}" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+    <!-- Floating particles for love section -->
+    <div class="floating-particles" id="particles"></div>
+    <div class="album-heading">
+        <h1>Gem of My Life</h1>
+    </div>
+    {% if images %}
+        <div class="carousel-container">
+            <div class="carousel">
+                {% for img in images %}
+                    <img src="{{ url_for('static', filename='uploads/' + img) }}"
+                         style="transform: rotateY({{ loop.index0 * (360 // images|length) }}deg) translateZ(400px);">
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="no-images">
+            <h2>No Images Uploaded</h2>
+            <p>No images were found for this album. Please go back and upload some images.</p>
+        </div>
+    {% endif %}
+    <a href="/">⬅ Back to Home</a>
+    <!-- Background music for love album -->
+    <audio id="backgroundMusic" loop>
+        <source src="{{ url_for('static', filename='music/love-song.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename='music/love-song.ogg') }}" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+    <script>
+        // Auto-play background music for love album
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('backgroundMusic');
+            audio.play().catch(function(error) {
+                console.log('Autoplay prevented:', error);
+                document.addEventListener('click', function() {
+                    audio.play().catch(function(e) {
+                        console.log('Play failed:', e);
+                    });
+                }, { once: true });
+            });
+            audio.addEventListener('pause', function() {
+                setTimeout(function() {
+                    if (audio.paused) {
+                        audio.play().catch(function(e) {
+                            console.log('Resume failed:', e);
+                        });
+                    }
+                }, 100);
+            });
+        });
+        // Create floating particles for love section
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particles = ['❤️', '💕', '💖', '💗', '💘', '💝', '💞', '💟', '✨', '🌟', '💫', '🌹', '🌺', '🌸', '💐'];
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const randomParticle = particles[Math.floor(Math.random() * particles.length)];
+                particle.textContent = randomParticle;
+                if (randomParticle.includes('❤️') || randomParticle.includes('💕') || randomParticle.includes('💖') || 
+                    randomParticle.includes('💗') || randomParticle.includes('💘') || randomParticle.includes('💝') || 
+                    randomParticle.includes('💞') || randomParticle.includes('💟')) {
+                    particle.classList.add('heart');
+                } else if (randomParticle.includes('✨') || randomParticle.includes('🌟') || randomParticle.includes('💫')) {
+                    particle.classList.add('sparkle');
+                } else if (randomParticle.includes('🌹') || randomParticle.includes('🌺') || randomParticle.includes('🌸') || 
+                           randomParticle.includes('💐')) {
+                    particle.classList.add('rose');
+                }
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particlesContainer.appendChild(particle);
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 6000);
+            }
+            setInterval(createParticle, 800);
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createParticle, i * 200);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Marriage Album</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: transparent;
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    h1 {
+      margin-top: 30px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      display: inline-block;
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 30px #ffd700, inset 0 0 20px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .carousel-container {
+      perspective: 1200px;
+      margin: 60px auto;
+      width: 80vw;
+      max-width: 400px;
+      height: 300px;
+      position: relative;
+      background: transparent;
+      border-radius: 20px;
+      padding: 20px;
+    }
+    .carousel {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+      animation: spin 25s linear infinite;
+    }
+    .carousel img {
+      position: absolute;
+      width: 250px;
+      height: 160px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 0 15px #fff;
+      transition: transform 0.5s;
+    }
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+    .no-images {
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      max-width: 400px;
+    }
+    a {
+      display: inline-block;
+      margin: 20px;
+      padding: 12px 25px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    a:hover {
+      background: #ffd700;
+      color: #fff;
+      transform: scale(1.05);
+    }
+    /* Floating rings and petals */
+    .floating-special {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .ring, .petal {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.85;
+      animation: floatSpecial 8s linear infinite;
+    }
+    .petal {
+      font-size: 1.7rem;
+      animation: floatPetal 10s linear infinite;
+    }
+    @keyframes floatSpecial {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0.7;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.1) rotate(10deg);
+        opacity: 0.2;
+      }
+    }
+    @keyframes floatPetal {
+      0% {
+        transform: translateY(100vh) scale(1) rotate(0deg);
+        opacity: 0.7;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.1) rotate(40deg);
+        opacity: 0.2;
+      }
+    }
+    /* Background video for marriage section */
+    .background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 1;
+    }
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: -1;
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .carousel-container {
+        height: 250px;
+      }
+      .carousel img {
+        width: 200px;
+        height: 130px;
+      }
+    }
+    .album-heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+      margin-bottom: 30px;
+    }
+    .album-heading h1 {
+      background: linear-gradient(90deg, #fceabb 0%, #f8b500 50%, #fceabb 100%);
+      color: #fff;
+      padding: 24px 48px;
+      border-radius: 30px;
+      box-shadow: 0 8px 32px 0 rgba(248, 181, 0, 0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10);
+      border: 3px solid rgba(255,255,255,0.25);
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 16px #f8b500, 0 1px 1px #fff;
+      position: relative;
+      z-index: 2;
+      animation: headingGlow 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes headingGlow {
+      0% { box-shadow: 0 8px 32px 0 rgba(248, 181, 0, 0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10); }
+      100% { box-shadow: 0 0 40px 10px #f8b500, 0 1.5px 8px 0 rgba(0,0,0,0.10); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background video for marriage section -->
+  <video class="background-video" autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='videos/marriage-video.mp4') }}" type="video/mp4">
+    <source src="{{ url_for('static', filename='videos/marriage-video.webm') }}" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+  <div class="video-overlay"></div>
+  <!-- Floating rings and petals -->
+  <div class="floating-special" id="special"></div>
+  <div class="album-heading">
+    <h1>A Day to Remember</h1>
+  </div>
+  {% if images %}
+    <div class="carousel-container">
+      <div class="carousel">
+        {% for img in images %}
+          <img src="{{ url_for('static', filename='uploads/' + img) }}"
+               style="transform: rotateY({{ loop.index0 * (360 // images|length) }}deg) translateZ(400px);">
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <div class="no-images">
+      <h2>No Images Uploaded</h2>
+      <p>No images were found for this album. Please go back and upload some images.</p>
+    </div>
+  {% endif %}
+  <a href="/">⬅ Back to Home</a>
+  <!-- Background music for marriage album -->
+  <audio id="backgroundMusic" loop>
+    <source src="{{ url_for('static', filename='music/marriage-song.mp3') }}" type="audio/mpeg">
+    <source src="{{ url_for('static', filename='music/marriage-song.ogg') }}" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio>
+  <script>
+    // Auto-play background music for marriage album
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = document.getElementById('backgroundMusic');
+      audio.play().catch(function(error) {
+        console.log('Autoplay prevented:', error);
+        document.addEventListener('click', function() {
+          audio.play().catch(function(e) {
+            console.log('Play failed:', e);
+          });
+        }, { once: true });
+      });
+      audio.addEventListener('pause', function() {
+        setTimeout(function() {
+          if (audio.paused) {
+            audio.play().catch(function(e) {
+              console.log('Resume failed:', e);
+            });
+          }
+        }, 100);
+      });
+    });
+    // Create floating rings and petals
+    document.addEventListener('DOMContentLoaded', function() {
+      const specialContainer = document.getElementById('special');
+      const rings = ['💍','👰','🤵','💒','💑'];
+      const petals = ['🌸','🌹','🥀','🌺','🌷'];
+      function createSpecial() {
+        const isRing = Math.random() > 0.4;
+        const el = document.createElement('div');
+        el.className = isRing ? 'ring' : 'petal';
+        el.textContent = isRing ? rings[Math.floor(Math.random() * rings.length)] : petals[Math.floor(Math.random() * petals.length)];
+        el.style.left = Math.random() * 100 + '%';
+        el.style.animationDelay = Math.random() * 8 + 's';
+        specialContainer.appendChild(el);
+        setTimeout(() => {
+          if (el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }, isRing ? 8000 : 10000);
+      }
+      setInterval(createSpecial, 700);
+      for (let i = 0; i < 14; i++) {
+        setTimeout(createSpecial, i * 300);
+      }
+    });
+  </script>
+</body>
+</html>
